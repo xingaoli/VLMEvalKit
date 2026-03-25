@@ -2574,8 +2574,21 @@ model_groups = [
     lfm2vl_series, rbdashmm_api_series_lmdeploy, interns1_series, insight_v_series, covt_series
 ]
 
+# Custom API Models (User-defined)
+custom_api_series = {
+    'Qwen3.5-0.8B-LMDeploy': partial(
+        LMDeployAPI,
+        api_base='http://127.0.0.1:8000/v1/chat/completions',
+        model='gpt-3.5-turbo',
+        max_tokens=16384,
+        temperature=0.0,
+        retry=5,
+        timeout=120,
+    )
+}
+
 # add by EASI team
-model_groups.extend([bagel_series, spatial_related_models, sensenova_si_series])
+model_groups.extend([bagel_series, spatial_related_models, sensenova_si_series, custom_api_series])
 
 for grp in model_groups:
     supported_VLM.update(grp)
