@@ -2576,16 +2576,23 @@ model_groups = [
 ]
 
 # Custom API Models (User-defined)
+# Note: LMDEPLOY_API_KEY and LMDEPLOY_API_BASE are loaded from .env file
 custom_api_series = {
-    'Qwen3.5-0.8B-LMDeploy': partial(
-        LMDeployAPI,
-        api_base='http://127.0.0.1:8000/v1/chat/completions',
-        model='gpt-3.5-turbo',
-        max_tokens=16384,
-        temperature=0.0,
-        retry=5,
-        timeout=120,
-    )
+    # 使用默认参数，从 .env 读取 key 和 base
+    'Qwen3.5-0.8B-LMDeploy': api.LMDeployAPI,
+
+    # 示例：增加超时时间
+    # 'Qwen3.5-0.8B-LMDeploy-Long': partial(
+    #     api.LMDeployAPI,
+    #     timeout=300,
+    #     retry=10,
+    # ),
+
+    # 示例：不同端口的模型
+    # 'InternVL2-LMDeploy': partial(
+    #     api.LMDeployAPI,
+    #     api_base='http://127.0.0.1:8001/v1/chat/completions',
+    # ),
 }
 
 # add by EASI team
