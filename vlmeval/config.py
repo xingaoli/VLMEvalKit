@@ -2579,11 +2579,15 @@ model_groups = [
 # Note: LMDEPLOY_API_KEY and LMDEPLOY_API_BASE are loaded from .env file
 custom_api_series = {
     # 使用默认参数，从 .env 读取 key 和 base
-    'Qwen3.5-0.8B-LMDeploy': api.LMDeployAPI,
+    'Qwen3.5-0.8B-LMDeploy': partial(
+        api.LMDeployAPI,
+        model='Qwen3.5-0.8B-LMDeploy',
+    ),
 
     # 示例：增加超时时间
     # 'Qwen3.5-0.8B-LMDeploy-Long': partial(
     #     api.LMDeployAPI,
+    #     model='Qwen3.5-0.8B-LMDeploy',
     #     timeout=300,
     #     retry=10,
     # ),
@@ -2591,6 +2595,7 @@ custom_api_series = {
     # 示例：不同端口的模型
     # 'InternVL2-LMDeploy': partial(
     #     api.LMDeployAPI,
+    #     model='InternVL2-LMDeploy',
     #     api_base='http://127.0.0.1:8001/v1/chat/completions',
     # ),
 }
